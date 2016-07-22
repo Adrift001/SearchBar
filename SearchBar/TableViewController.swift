@@ -12,13 +12,22 @@ class TableViewController: UITableViewController {
 
     
     let searchBar = ADSearchBar.searchBar()
+    private var alphaBgView:UIView!
     var barImageView: UIView?
     override func viewDidLoad() {
         super.viewDidLoad()
-        barImageView = navigationController?.navigationBar.subviews.first
         navigationController?.navigationBar.translucent = false
         navigationController?.navigationBar.setBackgroundImage(UIImage(named: "naviBGImage"), forBarMetrics: UIBarMetrics.Default)
         navigationController?.navigationBar.shadowImage = UIImage()
+        
+        barImageView = navigationController?.navigationBar.subviews.first
+        alphaBgView = UIView()
+        alphaBgView.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 64)
+        alphaBgView.backgroundColor = UIColor.orangeColor()
+        alphaBgView.alpha = 0
+        barImageView?.addSubview(alphaBgView)
+//        navigationController?.navigationBar.insertSubview(alphaBgView, aboveSubview: barImageView!)
+        
         searchBar.delegate = self
         let width = view.frame.size.width
         searchBar.frame = CGRectMake(0, 0, width, 30)
@@ -50,9 +59,9 @@ class TableViewController: UITableViewController {
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
         if 0 <= offset && offset <= 100 {
-            navigationController?.navigationBar.alpha = offset / 100
+            alphaBgView.alpha = offset / 100
         }else if(offset > 100){
-            navigationController?.navigationBar.alpha = 1
+            alphaBgView.alpha = 1
         }
     }
 }
