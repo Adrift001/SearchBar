@@ -12,10 +12,10 @@ class NextViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: #selector(nextPage))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(nextPage))
     }
     
-    func nextPage() {
+    @objc func nextPage() {
         let vc = Next2ViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
